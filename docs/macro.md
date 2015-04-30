@@ -48,3 +48,32 @@ only ever evaluated at compile time.
 
 ## What Can Macros Do that Functions Cannot ?
 
+* Adding enhanced for to Java requires a change at the compiler level.
+* Java developers just lived without enhanced `for` loop.
+
+Implementing foreach using macro
+```
+(defmacro foreach [[sym coll] & body]
+  `(loop [coll# ~coll]
+    (when-let [[~sym & xs#] (seq coll#)]
+	  ~@body
+	  (recur xs#))))
+	  
+(foreach [x [1 2 3]]
+  (println x))
+```
+
+Clojure’s set of built-in operators — called special forms — is very small. 
+Recall that the complete list contained only 16 items.
+`while, for, doseq, defn, defmacro, defrecord, when, cond, condp` are all macros.
+
+## Writing Your First Macro
+
+```
+(reverse-it (nltnirp "foo"))
+; (println "foo")
+```
+
+* clojure.walk provides a handy function postwalk, which lets us recursively 
+walk a series of nested lists and do something to certain elements.
+
