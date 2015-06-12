@@ -8,11 +8,9 @@
 
 * Macros allow you to control the Clojure compiler
 * distinction between runtime and compile time
-
 * homoiconicity enables macros
 * Clojure source code is read by the Clojure reader, which produces Clojure data structures from textual Clojure code—the very same Clojure data structures you have access to in your own code
 * `"(foo [bar] :baz 123)"`, the reader yields a list
-
 * between the read and evaluation steps, macros occupy a privileged status compared to functions.
 * __macros are called by the compiler__ with their unevaluated data structures as arguments and must return a Clojure data structure that can itself be evaluated.
 

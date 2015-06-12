@@ -1,7 +1,8 @@
 (ns guestbook.routes.home
   (:require [compojure.core :refer :all]
             [guestbook.views.layout :as layout]
-            [hiccup.form :refer :all]))
+            [hiccup.form :refer :all]
+            [noir.session :as session]))
 
 (defn show-guests []
   [:ul.guests
@@ -16,7 +17,7 @@
 
 (defn home [& [name message error]]
   (layout/common
-    [:h1 "Guestbook"]
+    [:h1 "Guestbook " (session/get :user)]
     [:p "Welcome to my guestbook"]
     [:p error]
     (show-guests)
@@ -41,4 +42,4 @@
 
 (defroutes home-routes
   (GET "/" [] (home))
-           (POST "/" [name message] (save-message name message)))
+  (POST "/" [name message] (save-message name message)))
